@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Input from "./components/Input.jsx";
+import List from "./components/List.jsx";
+import { useState, createContext } from "react";
+
+export const ListItemsContext = createContext();
 
 function App() {
+  const [listItems, setListItems] = useState(["corn", "potatoes"]);
+
+  const handleListItems = (input) => {
+    setListItems([...listItems, input]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ListItemsContext.Provider value={{ listItems, handleListItems }}>
+        <Input />
+        <List />
+      </ListItemsContext.Provider>
     </div>
   );
 }
